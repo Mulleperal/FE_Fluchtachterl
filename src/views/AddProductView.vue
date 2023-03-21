@@ -23,22 +23,52 @@
       <button type="submit" class="btn btn-primary">Add Product</button>
     </form>
   </div>
+  <SuccessModal
+    v-show="showModal"
+    @close-modal="redirectBackToProducts"
+  >
+  </SuccessModal>
 </template>
+
+
 <script>
+import SuccessModal from "@/components/organisms/SuccessModal.vue";
+
 export default {
   data() {
     return {
       category: '',
       description: '',
       name: '',
-      image: null
+      image: null,
+      showModal: false,
     };
   },
+  components: {
+    SuccessModal,
+  },
+  created() {
+    let isAdmin;
+    if ("jwt" in sessionStorage) {
+      isAdmin = sessionStorage.getItem("userrole") == "Admin";
+    }
+    if (!isAdmin) {
+      this.$router.push({
+        name: "about",
+      });
+    }
+  },
   methods: {
+    redirectBackToProducts() {
+      this.$router.push({
+        name: "products",
+      });
+    },
     handleFileInputChange(event) {
       this.image = event.target.files[0];
     },
     async handleSubmit() {
+      let jwtToken = sessionStorage.getItem("jwt");
       const formData = new FormData();
       formData.append('category', this.category);
       formData.append('description', this.description);
@@ -48,13 +78,12 @@ export default {
       }
       const response = await fetch(`http://localhost:8080/api/v1/product/create`, {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: {Authorization: `Bearer ${jwtToken}`,},
       });
-      if (response.ok) {
-        // do something with the response, such as navigate to a success page
-      } else {
-        // handle the error
-      }
+      if (response) {
+        this.showModal = true;
+      } 
     }
   }
 };

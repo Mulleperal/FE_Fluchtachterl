@@ -1,12 +1,17 @@
 <template>
   <div class="container">
-
-    <button v-if="checkAdmin()" @click="$router.push('/addProduct')">Add Product</button>
-
     <div class="row">
       <h2 class="my-3 border border-secondary border-2 rounded py-3">
-        Products
+        Products 
       </h2>
+      <div class="mb-3" v-if="checkAdmin()">
+        <button
+          v-on:click="$router.push('/addProduct')"
+          class="btn btn-primary ms-2"
+        >
+          Add Product
+        </button>
+      </div>
       <ProductCard
         v-for="(product, i) in products"
         :key="i"

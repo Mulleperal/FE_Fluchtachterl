@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <h2 class="my-3 border border-secondary border-2 rounded py-3">
-      Current Bids (BidTable.vue)
+      Current Bids
     </h2>
     <table class="table table-striped">
       <thead>

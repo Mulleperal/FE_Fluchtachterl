@@ -13,7 +13,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Fluchtachterl</a>
+        <a class="navbar-brand">Fluchtachterl</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <NavbarItem to="/usercontrol" v-if="!!this.isAdmin"
@@ -24,7 +24,8 @@
             <NavbarItem to="/mybids" v-if="!!this.isLogedIn"
               >My Bids</NavbarItem
             >
-            <NavbarItem to="/about">About</NavbarItem>
+            <NavbarItem to="/help">Help</NavbarItem>
+            <NavbarItem to="/imprint">Imprint</NavbarItem>
           </ul>
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">

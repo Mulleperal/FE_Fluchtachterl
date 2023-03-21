@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <h2 class="my-3 border border-secondary border-2 rounded py-3">
-        My User Data Overview (UserprofileView.vue)
+        My User Data Overview
       </h2>
       <SingleUserData
         v-bind:inputData="`username`"

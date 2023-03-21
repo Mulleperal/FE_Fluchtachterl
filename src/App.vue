@@ -8,19 +8,6 @@
   </nav>
   <router-view @login-event="login" @register-event="register" />
 
-  <footer>
-    <div class="container footer">
-      <div class="row">
-        <div class="col-sm-6">
-          <a href="/help">Help</a>
-        </div>
-        <div class="col-sm-6 text-right">
-          <a href="/impressum">Impressum</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
 </template>
 
 <script>

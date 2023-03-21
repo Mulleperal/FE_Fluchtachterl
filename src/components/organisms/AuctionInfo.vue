@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <h2 class="my-3 border border-secondary border-2 rounded py-3">
-      Auction Info (AuctionInfo.vue)
+      Auction Info
     </h2>
     <div class="col-4 text-start">
       <h4 class="fw-bold text-decoration-underline">Auction:</h4>
