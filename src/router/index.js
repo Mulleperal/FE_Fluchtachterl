@@ -4,6 +4,8 @@ import AboutView from "../views/AboutView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import LoginView from "../views/LoginView.vue";
 import AuctionsView from "../views/AuctionsView.vue";
+import ImpressumView from "../views/ImpressumView.vue"
+import HelpView from "../views/HelpView.vue"
 
 const routes = [
   {
@@ -15,6 +17,16 @@ const routes = [
     path: "/about",
     name: "about",
     component: AboutView,
+  },
+  {
+    path: "/impressum",
+    name: "impressum",
+    component: ImpressumView,
+  },
+  {
+    path: "/help",
+    name: "help",
+    component: HelpView,
   },
   {
     path: "/register",

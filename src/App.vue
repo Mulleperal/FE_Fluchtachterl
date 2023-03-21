@@ -7,6 +7,20 @@
     ></Bt5Navbar>
   </nav>
   <router-view @login-event="login" @register-event="register" />
+
+  <footer>
+    <div class="container footer">
+      <div class="row">
+        <div class="col-sm-6">
+          <a href="/help">Help</a>
+        </div>
+        <div class="col-sm-6 text-right">
+          <a href="/impressum">Impressum</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </template>
 
 <script>
@@ -66,6 +80,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  color: #2c3e50;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   color: #2c3e50;
 }
 </style>
