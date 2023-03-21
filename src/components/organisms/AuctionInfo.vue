@@ -72,5 +72,6 @@ export default {
   props: {
     pAuctionData: Object,
   },
+
 };
 </script>

@@ -19,6 +19,7 @@ import AuctionInfo from "@/components/organisms/AuctionInfo.vue";
 import BitTable from "@/components/organisms/BidTable.vue";
 
 import axios from "axios";
+import router from "@/router";
 
 export default {
   name: "SingleAuctionView",
@@ -63,6 +64,11 @@ export default {
             }
             sessionStorage.getItem("jwt");
             this.finishedLoading = true;
+            if ( new Date(this.auctionData.startDate) > new Date() ) {
+              alert('Auction not yet started')
+              router.push('/auctions')
+            }
+
           })
           .catch((error) => {
             console.log(error);

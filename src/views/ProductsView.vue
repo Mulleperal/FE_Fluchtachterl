@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+
+    <button v-if="checkAdmin()" @click="$router.push('/addProduct')">Add Product</button>
+
     <div class="row">
       <h2 class="my-3 border border-secondary border-2 rounded py-3">
         Products
@@ -23,11 +26,13 @@ export default {
   data: () => ({
     products: [],
     isLogedIn: Boolean,
+    isAdmin: Boolean
   }),
   computed: {},
   created() {
     this.getAllProducts();
     this.isLogedIn = this.checkLoginStatus();
+    console.log('is ADMIN', this.checkAdmin())
   },
   methods: {
     checkLoginStatus() {
@@ -37,6 +42,14 @@ export default {
         return false;
       }
     },
+    checkAdmin() {
+      console.log(sessionStorage)
+      if (sessionStorage.getItem('userrole') == 'Admin') {
+        return true
+      }
+      return false
+    }
+    ,
     async getAllProducts() {
       console.log("start axios");
       try {

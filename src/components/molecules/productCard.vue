@@ -3,7 +3,7 @@
     <p class="text-muted">{{ cardData.category }}</p>
     <h6 class="fw-bold">{{ cardData.name }}</h6>
     <img
-      :src="require('@/assets' + imageName)"
+      :src="require('@/assets/' + imageName)"
       :alt="imageName"
       :width="128"
       :height="128"
@@ -41,14 +41,21 @@ export default {
     },
   },
   computed: {
+    // imageName() {
+    //   let path = this.cardData.img;
+    //   if (path == null) {
+    //     return "/logo.png";
+    //   }
+    //   //path = path.slice(9, -4);
+    //   return path;
+    // },
     imageName() {
-      let path = this.cardData.img;
-      if (path == null) {
-        return "/logo.png";
+      if (!this.cardData.img) {
+        return "logo.png";
+      } else {
+        return `${this.cardData.img}`;
       }
-      //path = path.slice(9, -4);
-      return path;
-    },
+    }
   },
 };
 </script>
