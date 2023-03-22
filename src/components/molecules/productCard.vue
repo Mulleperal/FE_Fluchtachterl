@@ -18,25 +18,27 @@
       create Auction
     </button>
 
-    <button v-if="isAdmin"
+    <button v-if="isAdmin && this.logedIn"
             class="btn btn-primary ms-2 my-2"
             v-on:click="$router.push(`../editProduct/${cardData.id}`)">
       Edit Product
     </button>
+
+    <button v-if="isAdmin && this.logedIn"
+            class="btn btn-danger ms-2 my-2"
+            v-on:click="deleteProduct(cardData.id)">
+      Delete Product
+    </button>
+
   </div>
 </template>
 
 <script>
-// import image from "@/assets/logo.png";
-import checkAdmin from '../../views/ProductsView.vue'
+
 
 export default {
   name: "productCard",
-  /*   data: function () {
-    return {
-      image: image,
-    };
-  }, */
+
   props: {
     cardData: Object,
     logedIn: Boolean,
@@ -49,17 +51,23 @@ export default {
         params: {productId: passedId},
       });
     },
+    async deleteProduct(productId) {
+      let jwtToken = sessionStorage.getItem("jwt");
+      await fetch(`http://localhost:8080/api/v1/product/delete/${productId}`, {
+        method: 'DELETE',
+        headers: {Authorization: `Bearer ${jwtToken}`,},
+      }).then(
+          () => {
+            // alerts Admin and refreshes component
+            alert('Item deleted')
+            this.$router.go()
+          }
+      );
+    }
 
   },
   computed: {
-    // imageName() {
-    //   let path = this.cardData.img;
-    //   if (path == null) {
-    //     return "/logo.png";
-    //   }
-    //   //path = path.slice(9, -4);
-    //   return path;
-    // },
+
     imageName() {
       if (!this.cardData.img) {
         return "logo.png";
