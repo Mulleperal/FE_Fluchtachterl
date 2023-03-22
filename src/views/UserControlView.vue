@@ -28,18 +28,18 @@
               <button
                 v-if="user.locked"
                 v-on:click.prevent="unlockUser(user.username)"
-                class="btn btn-secondary ms-2"
+                class="btn btn-warning ms-2"
               >
-                BLOCK
+                UNBLOCK
               </button>
             </td>
             <td>
               <button
                 v-if="!user.locked"
                 v-on:click.prevent="lockUser(user.username)"
-                class="btn btn-warning ms-2"
+                class="btn btn-secondary ms-2"
               >
-                UNBLOCK
+                BLOCK
               </button>
             </td>
             <td>
