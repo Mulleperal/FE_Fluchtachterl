@@ -64,7 +64,8 @@ export default {
             }
             sessionStorage.getItem("jwt");
             this.finishedLoading = true;
-            if ( new Date(this.auctionData.startDate) > new Date() ) {
+
+            if (!this.checkOwner() && new Date(this.auctionData.startDate) > new Date() ) {
               alert('Auction not yet started')
               router.push('/auctions')
             }
