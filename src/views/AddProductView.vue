@@ -81,7 +81,9 @@ export default {
     redirectBackToProducts() {
       this.$router.push({
         name: "products",
-      });
+      }).then(
+          ()=> {this.$router.go()}
+      )
     },
     handleFileInputChange(event) {
       this.image = event.target.files[0];
