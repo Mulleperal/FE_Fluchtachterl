@@ -1,7 +1,7 @@
 <template>
   <div class="container col-8 col-md-4 col-sm-6">
     <h2 class="my-3 border border-secondary border-2 rounded py-3">
-      Place Bid
+      Create Auction
     </h2>
     <form>
       <div class="row p-1">
@@ -134,7 +134,7 @@
           type="submit"
           v-on:click.prevent="createAuction"
         >
-          Save Transaction
+          Save Auction
         </button>
       </div>
     </form>
