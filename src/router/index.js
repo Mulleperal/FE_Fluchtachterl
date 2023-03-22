@@ -70,6 +70,11 @@ const routes = [
     component: () => import("../views/AddProductView.vue"),
   },
   {
+    path: "/editProduct/:productId",
+    name: "editProduct",
+    component: () => import("../views/AddProductView.vue"),
+  },
+  {
     path: "/product/:productId/addAuction",
     name: "addAuction",
     component: () => import("../views/AddAuctionView.vue"),

@@ -3,24 +3,33 @@
     <p class="text-muted">{{ cardData.category }}</p>
     <h6 class="fw-bold">{{ cardData.name }}</h6>
     <img
-      :src="require('@/assets/' + imageName)"
-      :alt="imageName"
-      :width="128"
-      :height="128"
+        :src="require('@/assets/' + imageName)"
+        :alt="imageName"
+        :width="128"
+        :height="128"
     />
     <p>{{ cardData.description }}</p>
     <button
-      v-if="this.logedIn"
-      v-on:click.prevent="redirectToCreateAuction(cardData.id)"
-      class="btn btn-primary ms-2 my-2"
+        v-if="this.logedIn"
+        v-on:click.prevent="redirectToCreateAuction(cardData.id)"
+        class="btn btn-primary ms-2 my-2"
     >
+
       create Auction
+    </button>
+
+    <button v-if="isAdmin"
+            class="btn btn-primary ms-2 my-2"
+            v-on:click="$router.push(`../editProduct/${cardData.id}`)">
+      Edit Product
     </button>
   </div>
 </template>
 
 <script>
 // import image from "@/assets/logo.png";
+import checkAdmin from '../../views/ProductsView.vue'
+
 export default {
   name: "productCard",
   /*   data: function () {
@@ -31,14 +40,16 @@ export default {
   props: {
     cardData: Object,
     logedIn: Boolean,
+    isAdmin: Boolean,
   },
   methods: {
     redirectToCreateAuction(passedId) {
       this.$router.push({
         name: "addAuction",
-        params: { productId: passedId },
+        params: {productId: passedId},
       });
     },
+
   },
   computed: {
     // imageName() {

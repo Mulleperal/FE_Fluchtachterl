@@ -17,6 +17,7 @@
         :key="i"
         v-bind:cardData="product"
         v-bind:logedIn="isLogedIn"
+        v-bind:isAdmin="isAdmin"
       />
     </div>
   </div>
@@ -37,7 +38,6 @@ export default {
   created() {
     this.getAllProducts();
     this.isLogedIn = this.checkLoginStatus();
-    console.log('is ADMIN', this.checkAdmin())
   },
   methods: {
     checkLoginStatus() {

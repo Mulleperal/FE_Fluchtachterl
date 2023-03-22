@@ -16,11 +16,15 @@
         <textarea class="form-control" v-model="description"></textarea>
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">Image</label>
+      <div class="mb-3" >
+        <label class="form-label" >Image</label>
         <input type="file" class="form-control" ref="fileInput" @change="handleFileInputChange">
+        <p class="warn" style="color: red" v-if="hasImg">Uploading a new Img will overwrite old one</p>
+
       </div>
-      <button type="submit" class="btn btn-primary">Add Product</button>
+
+      <button type="submit" class="btn btn-primary" v-if="!isEdit">Add Product</button>
+      <button type="submit" class="btn btn-primary" v-if="isEdit">Update Product</button>
     </form>
   </div>
   <SuccessModal
@@ -42,12 +46,14 @@ export default {
       name: '',
       image: null,
       showModal: false,
+      isEdit: false,
+      hasImg: false,
     };
   },
   components: {
     SuccessModal,
   },
-  created() {
+  async created() {
     let isAdmin;
     if ("jwt" in sessionStorage) {
       isAdmin = sessionStorage.getItem("userrole") == "Admin";
@@ -56,6 +62,19 @@ export default {
       this.$router.push({
         name: "about",
       });
+    }
+    if (this.$route.params.productId) {
+      this.isEdit = true
+      const data = await fetch(`http://localhost:8080/api/v1/product/get/${this.$route.params.productId}`)
+          .then(resp => resp.json())
+          .then(data => {
+            this.category = data.category
+                this.description = data.description
+                this.name = data.name
+                if (data.img) {
+                  this.hasImg = true
+                }
+          });
     }
   },
   methods: {
@@ -76,11 +95,22 @@ export default {
       if (this.image) {
         formData.append('file', this.image);
       }
-      const response = await fetch(`http://localhost:8080/api/v1/product/create`, {
-        method: 'POST',
-        body: formData,
-        headers: {Authorization: `Bearer ${jwtToken}`,},
-      });
+      let response = null
+
+      if (this.isEdit) {
+        response = await fetch(`http://localhost:8080/api/v1/product/update/${this.$route.params.productId}`, {
+          method: 'PUT',
+          body: formData,
+          headers: {Authorization: `Bearer ${jwtToken}`,},
+        });
+      }
+      else {
+        response = await fetch(`http://localhost:8080/api/v1/product/create`, {
+          method: 'POST',
+          body: formData,
+          headers: {Authorization: `Bearer ${jwtToken}`,},
+        });
+      }
       if (response) {
         this.showModal = true;
       } 
