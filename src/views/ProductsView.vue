@@ -38,6 +38,7 @@ export default {
   created() {
     this.getAllProducts();
     this.isLogedIn = this.checkLoginStatus();
+    this.isAdmin = this.checkAdmin()
   },
   methods: {
     checkLoginStatus() {
@@ -49,6 +50,10 @@ export default {
     },
     checkAdmin() {
       console.log(sessionStorage)
+      if (sessionStorage.getItem('userrole') == 'Gast') {
+        return false
+      }
+
       if (sessionStorage.getItem('userrole') == 'Admin') {
         return true
       }

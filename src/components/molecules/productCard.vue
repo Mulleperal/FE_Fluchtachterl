@@ -18,17 +18,19 @@
       create Auction
     </button>
 
-    <button v-if="isAdmin && this.logedIn"
-            class="btn btn-primary ms-2 my-2"
-            v-on:click="$router.push(`../editProduct/${cardData.id}`)">
-      Edit Product
-    </button>
+    <div class="" v-if="isAdmin()">
+      <button
+              class="btn btn-primary ms-2 my-2"
+              v-on:click="$router.push(`../editProduct/${cardData.id}`)">
+        Edit Product
+      </button>
 
-    <button v-if="isAdmin && this.logedIn"
-            class="btn btn-danger ms-2 my-2"
-            v-on:click="deleteProduct(cardData.id)">
-      Delete Product
-    </button>
+      <button
+              class="btn btn-danger ms-2 my-2"
+              v-on:click="deleteProduct(cardData.id)">
+        Delete Product
+      </button>
+    </div>
 
   </div>
 </template>
@@ -51,6 +53,12 @@ export default {
         params: {productId: passedId},
       });
     },
+    isAdmin() {
+      console.log('ree',(this.$props.isAdmin && this.$props.logedIn))
+
+
+      return (this.isAdmin && this.logedIn)
+    },
     async deleteProduct(productId) {
       let jwtToken = sessionStorage.getItem("jwt");
       await fetch(`http://localhost:8080/api/v1/product/delete/${productId}`, {
@@ -66,9 +74,11 @@ export default {
     }
 
   },
+
   computed: {
 
     imageName() {
+      console.log(this.isAdmin)
       if (!this.cardData.img) {
         return "logo.png";
       } else {
