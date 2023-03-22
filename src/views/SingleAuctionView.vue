@@ -3,7 +3,7 @@
     <AuctionInfo v-bind:pAuctionData="auctionData" v-if="finishedLoading" />
     <AuctionActionBar
       v-bind:auctionId="auctionId"
-      v-if="!isOwner && isLogedIn"
+      v-if="(!isOwner && isLogedIn)"
     />
     <BitTable
       v-bind:auctionId="auctionId"
